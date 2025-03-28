@@ -1,0 +1,13 @@
+{
+  "name": "lolcat-generator",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to generate LOL cat images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1450.0",
+    "axios": "^1.6.0"
+  }
+}
