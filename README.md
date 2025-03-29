@@ -14,7 +14,7 @@ This AWS Lambda function generates LOL cat memes by combining random cat images 
 1. AWS CLI installed and configured
 2. Node.js 18.x or later
 3. AWS account with appropriate permissions
-4. AWS CLI profile named 'openbook' configured
+4. AWS CLI profile named 'your-aws-profile' configured
 
 ## Setup
 
@@ -24,7 +24,7 @@ npm install
 ```
 
 2. Environment Variables:
-- `S3_BUCKET`: Name of the S3 bucket (default: openbook-lolcat-generator)
+- `S3_BUCKET`: Name of the S3 bucket (default: your-aws-profile-lolcat-generator)
 
 ## Infrastructure
 
@@ -40,7 +40,7 @@ The function uses the following AWS resources:
     - Lambda Basic Execution
     - S3 (PutObject, GetObject, ListBucket)
     
-- **S3 Bucket**: `openbook-lolcat-generator`
+- **S3 Bucket**: `your-aws-profile-lolcat-generator`
   - Stores generated meme images
   - Public read access for image URLs
 
@@ -60,7 +60,7 @@ zip -r function.zip .
 aws lambda update-function-code \
     --function-name lolcat-generator \
     --zip-file fileb://function.zip \
-    --profile openbook
+    --profile your-aws-profile
 ```
 
 ## Usage
@@ -71,7 +71,7 @@ aws lambda update-function-code \
 aws lambda invoke \
     --function-name lolcat-generator \
     --payload '{}' \
-    --profile openbook \
+    --profile your-aws-profile \
     output.json
 
 # View result
@@ -84,7 +84,7 @@ cat output.json
     "statusCode": 200,
     "body": {
         "message": "LOLcat generated successfully!",
-        "url": "https://openbook-lolcat-generator.s3.amazonaws.com/lolcat-[timestamp].jpg",
+        "url": "https://your-aws-profile-lolcat-generator.s3.amazonaws.com/lolcat-[timestamp].jpg",
         "text": "[Random LOLcat phrase]"
     }
 }
@@ -128,4 +128,4 @@ To add new features or modify the function:
 ## Monitoring
 
 - CloudWatch Logs: `/aws/lambda/lolcat-generator`
-- S3 bucket contents: `aws s3 ls s3://openbook-lolcat-generator --profile openbook`
+- S3 bucket contents: `aws s3 ls s3://your-aws-profile-lolcat-generator --profile your-aws-profile`

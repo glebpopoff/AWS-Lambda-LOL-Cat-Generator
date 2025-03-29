@@ -6,8 +6,8 @@ set -e
 echo "🚀 Starting deployment process..."
 
 # Check if AWS profile exists
-if ! aws configure list --profile openbook &> /dev/null; then
-    echo "❌ Error: AWS profile 'openbook' not found"
+if ! aws configure list --profile your-aws-profile &> /dev/null; then
+    echo "❌ Error: AWS profile 'your-aws-profile' not found"
     exit 1
 fi
 
@@ -24,7 +24,7 @@ echo "🔄 Updating Lambda function..."
 aws lambda update-function-code \
     --function-name lolcat-generator \
     --zip-file fileb://function.zip \
-    --profile openbook
+    --profile your-aws-profile
 
 # Clean up
 echo "🧹 Cleaning up..."
@@ -35,7 +35,7 @@ echo "🧪 Testing the function..."
 aws lambda invoke \
     --function-name lolcat-generator \
     --payload '{}' \
-    --profile openbook \
+    --profile your-aws-profile \
     test-output.json > /dev/null
 
 if [ $? -eq 0 ]; then
